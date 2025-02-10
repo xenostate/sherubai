@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Наши продукты</title>
+    <link rel="stylesheet" href="css/styles.css">
+</head>
+<body>
+    <header>
+        <div class="header-container">
+            <div class="logo">
+                <a href="index.html">
+                    <img src="images/logo1.png" alt="Sherubai Komir Logo" />
+                </a>
+            </div>
+            <nav>
+                <ul>
+                    <li><a href="index.html">Главная</a></li>
+                    <li><a href="products.html">Каталог</a></li>
+                    <li><a href="about.html">О нас</a></li>
+                    <li><a href="careers.html">Карьера</a></li>
+                    <li><a href="contact.html">Связь с нами</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+
+
+    <section class="products">
+        <h2>Наши продукты</h2>
+        <div id="product-list" class="product-grid">
+            <p>Загрузка...</p>
+        </div>
+    </section>
+
+
+    <script>
+        fetch("/admin/data")
+            .then(res => res.json())
+            .then(data => {
+                const productContainer = document.getElementById("product-list");
+                productContainer.innerHTML = data.products.map(product => {
+                    // Ensure the correct image path
+                    const imageUrl = product.imageUrl && product.imageUrl.startsWith("/uploads/")
+                        ? product.imageUrl
+                        : `/uploads/${product.imageUrl}`;
+    
+                    return `
+                        <div class="product-card">
+                            <h3>${product.name}</h3>
+                            ${product.imageUrl ? `<img src="${imageUrl}" alt="${product.name}" style="max-width: 300px; height: auto;">` : ""}
+                            <p>${product.description}</p>
+                            <p><strong>Наличие:</strong> ${product.availability}</p>
+                            <p><strong>Условия:</strong> ${product.conditions}</p>
+                            <p><strong>Оплата:</strong> ${product.payment}</p>
+                            <p><strong>Доставка:</strong> ${product.delivery}</p>
+                            <p><strong>Цена:</strong> ${product.price}₸ за тонну</p>
+                        </div>`;
+                }).join("");
+            })
+            .catch(error => console.error("Error fetching product data:", error));
+    </script>
+    
+
+    <footer>
+        <p> Адрес: г. Караганда, Улица Жанибекова 45 </p>
+        <p> Контактный номер: +7 (721) 221-33-31 </p>
+        <p> © 2019-2025, ТОО "Sherubai Komir" </p>
+    </footer>
+</body>
+</html>

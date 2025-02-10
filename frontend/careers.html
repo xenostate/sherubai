@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Карьера</title>
+    <link rel="stylesheet" href="css/styles.css">
+</head>
+<body>
+    <header>
+        <div class="header-container">
+            <div class="logo">
+                <a href="index.html">
+                    <img src="images/logo1.png" alt="Sherubai Komir Logo" />
+                </a>
+            </div>
+            <nav>
+                <ul>
+                    <li><a href="index.html">Главная</a></li>
+                    <li><a href="products.html">Каталог</a></li>
+                    <li><a href="about.html">О нас</a></li>
+                    <li><a href="careers.html">Карьера</a></li>
+                    <li><a href="contact.html">Связь с нами</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    
+    
+    <section class="careers">
+        <h2>Вакансии</h2>
+        <div id="job-listings">
+            <p>Загрузка...</p>
+        </div>
+    </section>
+    
+    <script>
+        fetch("/admin/data")
+            .then(res => res.json())
+            .then(data => {
+                const jobContainer = document.getElementById("job-listings");
+                jobContainer.innerHTML = data.jobs.map(job => {
+                    // Format the posting date
+                    const postDate = new Date(job.createdAt).toLocaleDateString("ru-RU", {
+                        year: "numeric", month: "long", day: "numeric"
+                    });
+    
+                    return `<div class="job">
+                        <h3>${job.title}</h3>
+                        <p>${job.description}</p>
+                        <p><strong>Зарплата:</strong> ${job.salary}₸</p>
+                        <p><strong>Дата публикации:</strong> ${postDate}</p>
+                    </div>`;
+                }).join("");
+            });
+    </script>
+    
+    
+
+    <footer>
+        <p> Адрес: г. Караганда, Улица Жанибекова 45 </p>
+        <p> Контактный номер: +7 (721) 221-33-31 </p>
+        <p> © 2019-2025, ТОО "Sherubai Komir" </p>
+    </footer>
+</body>
+</html>

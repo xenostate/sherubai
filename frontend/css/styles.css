@@ -1,0 +1,587 @@
+/* Import Google Font */
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap');
+
+body {
+    font-family: 'Poppins', sans-serif;
+    line-height: 1.6;
+    letter-spacing: 0.5px;
+    background-color: #f8f9fa;
+}
+
+
+/*body {
+    font-family: 'Arial', sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #f4f4f4;
+    color: #333;
+}*/
+
+
+
+/* Header Styling */
+header {
+    background: var(--secondary-color);
+    color: var(--text-light);
+    padding: 15px 0;
+    text-align: center;
+}
+
+/* Navigation Menu */
+nav ul {
+    list-style: none; /* Remove default bullet points */
+    display: flex; /* Use flexbox for alignment */
+    justify-content: space-evenly; /* Ensure links are spaced evenly */
+    align-items: center; /* Align items vertically */
+    width: 100%; /* Allow the navigation to take the full header width */
+    margin: 0; /* Remove default margin */
+    padding: 0; /* Remove default padding */
+    gap: 40px;
+}
+
+
+/* Navigation Links */
+nav ul li a {
+    font-size: 1.4em;
+    color: var(--text-light); /* White text */
+    text-decoration: none;
+    font-weight: bold;
+    padding: 10px 15px; /* Add some padding to links */
+    transition: color 0.3s ease-in-out;
+}
+
+nav ul li {
+    display: inline;
+    margin: 0 15px;
+}
+
+
+/* Hover Effect for Links */
+nav ul li a:hover {
+    color: var(--primary-color);
+    text-decoration: underline;
+}
+
+
+/* Hero Section */
+.hero {
+    background: url('../images/shahta2.jpeg') no-repeat center center/cover;
+    text-align: center;
+    padding: 100px 20px;
+    color: var(--text-light);
+    position: relative;
+}
+
+.hero::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(51, 51, 51, 0.6); /* Dark gray overlay */
+}
+
+.hero-content {
+    position: relative;
+    z-index: 2;
+    max-width: 600px;
+    margin: auto;
+}
+
+.hero h2 {
+    font-size: 2.5em;
+}
+
+.btn {
+    background: var(--primary-color);
+    color: var(--text-light);
+    padding: 12px 20px;
+    text-decoration: none;
+    border-radius: 5px;
+    font-size: 1.1em;
+    font-weight: bold;
+    transition: background 0.3s ease-in-out;
+}
+
+.btn:hover {
+    background: #e68900; /* Slightly darker orange */
+}
+
+/* Features Section */
+.features {
+    display: flex;
+    justify-content: space-around;
+    padding: 50px 20px;
+    background: white;
+}
+
+.feature-box {
+    text-align: center;
+    padding: 20px;
+    width: 30%;
+    box-shadow: 2px 2px 10px rgba(0, 0, 0, 0.1);
+}
+
+/* Footer */
+footer {
+    background: var(--secondary-color);
+    color: var(--text-light);
+    text-align: center;
+    padding: 20px;
+    font-size: 0.9em;
+}
+
+footer a {
+    color: var(--primary-color);
+    text-decoration: none;
+}
+
+footer a:hover {
+    text-decoration: underline;
+}
+
+
+:root {
+    --primary-color: #ff9800; /* Orange */
+    --secondary-color: #333; /* Dark gray/Black */
+    --background-light: #f8f9fa; /* Light background */
+    --text-dark: #333; /* Main text color */
+    --text-light: #fff; /* Light text color */
+}
+
+.job {
+    background: var(--background-light);
+    border: 1px solid var(--secondary-color);
+    border-radius: 10px;
+    padding: 20px;
+    text-align: left;
+    transition: transform 0.3s, box-shadow 0.3s;
+}
+
+.job h3 {
+    color: var(--primary-color);
+}
+
+.job:hover {
+    transform: translateY(-5px);
+    box-shadow: 0px 4px 15px rgba(0, 0, 0, 0.1);
+}
+
+/* Logo Styles */
+.logo img {
+    height: 60px; /* Adjust logo size */
+    display: block;
+    margin: 0 auto; /* Center the logo */
+}
+
+
+
+
+/* Fade-In Animation */
+.fade-in {
+    opacity: 0;
+    transform: translateY(20px);
+    transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+}
+
+.fade-in.visible {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+
+/* Header Container */
+header {
+    background: var(--secondary-color); /* Dark gray background */
+    padding: 10px 20px;
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+}
+
+/* Flex Container for Logo and Navigation */
+.header-container {
+    display: flex;
+    justify-content: space-between; /* Space between logo and nav */
+    align-items: center; /* Align logo and nav vertically */
+    max-width: 1200px; /* Optional: Set max width for the header content */
+    margin: 0 auto; /* Center the header container */
+    width: 100%; /* Ensure it spans the entire header */
+}
+
+
+/* Header Top Section (H1 and Logo) 
+.header-top {
+    display: flex;
+    align-items: center; 
+    justify-content: space-between; 
+    padding-bottom: 10px;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.2); 
+}*/
+
+
+.header-top h1 {
+    font-size: 1.8em;
+    margin: 0;
+}
+/* Adjustment for smaller screens */
+
+@media (max-width: 768px) {
+    .header-container {
+        flex-direction: column; 
+        align-items: center; 
+    }
+
+    nav ul {
+        flex-direction: column; 
+        gap: 10px; 
+    }
+}
+
+.about {
+    background: var(--background-light);
+    padding: 50px 20px;
+    text-align: center;
+}
+
+.about .container {
+    max-width: 900px;
+    margin: 0 auto;
+}
+
+.about h2 {
+    font-size: 2em;
+    color: var(--secondary-color);
+    margin-bottom: 20px;
+}
+
+.about p {
+    font-size: 1.1em;
+    line-height: 1.6;
+    color: var(--text-dark);
+    margin-bottom: 20px;
+}
+
+/* Style the "Подробнее" button */
+.about .btn {
+    display: inline-block;
+    background: var(--primary-color);
+    color: var(--text-light);
+    padding: 10px 20px;
+    font-size: 1.1em;
+    text-decoration: none;
+    border-radius: 5px;
+    transition: background 0.3s ease-in-out;
+}
+
+.about .btn:hover {
+    background: #e68900;
+}
+
+.about-full {
+    background: white;
+    padding: 50px 20px;
+    text-align: left;
+}
+
+.about-full .container {
+    max-width: 900px;
+    margin: 0 auto;
+}
+
+.about-full h2 {
+    font-size: 2.5em;
+    color: var(--secondary-color);
+    margin-bottom: 20px;
+}
+
+.about-full p {
+    font-size: 1.1em;
+    line-height: 1.8;
+    color: var(--text-dark);
+    margin-bottom: 15px;
+}
+
+.products {
+    background: var(--background-light);
+    padding: 50px 20px;
+    text-align: center;
+}
+
+.products .container {
+    max-width: 1100px;
+    margin: 0 auto;
+}
+
+.products h2 {
+    font-size: 2.5em;
+    color: var(--secondary-color);
+    margin-bottom: 30px;
+}
+
+/* Product List Styling */
+.product-list {
+    display: flex;
+    justify-content: space-between;
+    gap: 20px;
+    flex-wrap: wrap;
+}
+
+/* Product Card Styling */
+.product-card {
+    background: white;
+    border-radius: 10px;
+    box-shadow: 2px 2px 10px rgba(0, 0, 0, 0.1);
+    padding: 20px;
+    width: 30%;
+    text-align: left;
+    transition: transform 0.3s ease-in-out, box-shadow 0.3s;
+}
+
+.product-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 2px 2px 20px rgba(0, 0, 0, 0.2);
+}
+
+.product-card img {
+    width: 100%;
+    border-radius: 10px;
+    margin-bottom: 15px;
+}
+
+.product-card h3 {
+    font-size: 1.5em;
+    color: var(--primary-color);
+}
+
+.product-card p {
+    font-size: 1em;
+    margin-bottom: 10px;
+}
+
+/* Button Styling */
+.product-card .btn {
+    display: inline-block;
+    background: var(--primary-color);
+    color: white;
+    padding: 10px 15px;
+    text-decoration: none;
+    border-radius: 5px;
+    transition: background 0.3s;
+}
+
+.product-card .btn:hover {
+    background: #e68900;
+}
+
+.product-grid {
+    display: flex;
+    flex-wrap: wrap;  /* Allows items to wrap to the next row */
+    gap: 20px;  /* Space between items */
+    justify-content: center; /* Center products on the page */
+}
+
+.product-card {
+    width: calc(33.33% - 20px); /* Makes sure three products fit per row */
+    min-width: 250px;  /* Ensures they don't shrink too much */
+    max-width: 300px;  /* Prevents cards from getting too large */
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    padding: 15px;
+    text-align: center;
+    background-color: #fff;
+    box-shadow: 2px 2px 10px rgba(0, 0, 0, 0.1);
+}
+
+.product-card img {
+    max-width: 100%; 
+    height: auto;
+    border-radius: 8px;
+}
+
+header, footer {
+    background: linear-gradient(to bottom, #444, #222); 
+    color: white;
+    padding: 20px;
+    text-align: center;
+} 
+
+
+.about-full {
+    padding: 50px 20px;
+    background-color: #f5f5f5;
+}
+
+.container {
+    max-width: 1200px;
+    margin: auto;
+}
+
+.about-grid {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+    margin-bottom: 40px;
+}
+
+.about-text {
+    flex: 1;
+}
+
+.about-image {
+    flex: 1;
+    text-align: center;
+}
+
+.about-image1 {
+    flex: 1;
+    text-align: center;
+}
+.about-image2 {
+    flex: 1;
+    text-align: center;
+}
+
+.about-image img {
+    width: 450px;
+    height: 330px;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+.about-image1 img {
+    width: 450px;
+    height: 260px;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+.about-image2 img {
+    width: 450px;
+    height: 370px;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+/* Responsive Design */
+@media (max-width: 900px) {
+    .about-grid {
+        flex-direction: column;
+        text-align: center;
+    }
+}
+
+.logo {
+    display: block;
+    margin: 0 auto;
+  }
+
+
+/* Map Container Styling */
+.map-container {
+    max-width: 800px; /* Matches the iframe width */
+    margin: 20px auto; /* Centers the map and adds vertical spacing */
+    border: 1px solid #ddd; /* Optional: add a subtle border */
+    border-radius: 8px; /* Optional: round the corners */
+    overflow: hidden; /* Ensures any overflow is clipped */
+  }
+  
+  /* Responsive Adjustment */
+  @media (max-width: 600px) {
+    .map-container {
+      width: 100%;
+      max-width: 100%;
+    }
+    
+    .map-container iframe {
+      width: 100%;
+      height: auto;
+    }
+  }
+
+ /* General Contact Section Styling */
+.contact-section {
+    padding: 50px 20px;
+    background: var(--background-light); /* Or use a subtle gradient/pattern */
+  }
+  
+  /* Container to split info and map */
+  .contact-container {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 30px;
+    max-width: 1200px;
+    margin: 0 auto;
+  }
+  
+  /* Contact Information Card */
+  .contact-info {
+    flex: 1;
+    min-width: 300px;
+    padding: 20px;
+    background: #fff;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  }
+  
+  .contact-info h2 {
+    color: var(--secondary-color);
+    margin-bottom: 20px;
+  }
+  
+  .contact-item {
+    display: flex;
+    align-items: center;
+    margin-bottom: 15px;
+  }
+  
+  .contact-item i {
+    font-size: 1.2em;
+    color: var(--primary-color);
+    margin-right: 10px;
+  }
+  
+  /* Map Card */
+  .contact-map {
+    flex: 1;
+    min-width: 300px;
+    padding: 20px;
+    background: #fff;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  }
+  
+  .contact-map iframe {
+    width: 100%;
+    border: none;
+    border-radius: 8px;
+  }
+  
+  /* Responsive: Stack columns on smaller screens */
+  @media (max-width: 768px) {
+    .contact-container {
+      flex-direction: column;
+    }
+  }
+
+
+  
+  .about-video {
+    margin-top: 20px; /* Adds space above the video */
+    /* Optional: center the video container */
+    display: flex;
+    justify-content: center;
+  }
+  
+  .about-video video {
+    border: 5px solid var(--text-dark); /* Creates a border using your primary color */
+    border-radius: 10px; /* Rounds the corners for a softer look */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Adds a subtle shadow for depth */
+    max-width: 100%;
+    height: auto;
+  }
+
+
+  
+  

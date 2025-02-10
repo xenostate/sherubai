@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Admin Panel</title>
+  <!-- Link to external CSS file -->
+  <link rel="stylesheet" href="css/styles.css">
+</head>
+<body>
+  <header>
+    <h2>Admin Panel</h2>
+  </header>
+  
+  <main>
+    <!-- Jobs Section -->
+    <section class="dashboard-section">
+      <h3>Manage Job Listings</h3>
+      <div id="jobs" class="cards-container">
+        <!-- Jobs will be loaded here -->
+      </div>
+      <form id="jobForm" class="admin-form">
+        <input type="text" id="jobTitle" placeholder="Название вакансии" required>
+        <textarea id="jobDescription" placeholder="Описание вакансии" required></textarea>
+        <input type="text" id="jobSalary" placeholder="Зарплата (например, 500 000 KZT или Договорная)" required>
+        <button type="submit" class="btn">Добавить вакансию</button>
+      </form>
+    </section>
+    
+    <!-- Products Section -->
+    <section class="dashboard-section">
+      <h3>Manage Products</h3>
+      <div id="products" class="cards-container">
+        <!-- Products will be loaded here -->
+      </div>
+      <form id="productForm" enctype="multipart/form-data" class="admin-form">
+        <input type="text" id="productName" placeholder="Название продукта" required>
+        <textarea id="productDescription" placeholder="Описание продукта" required></textarea>
+        <input type="text" id="productAvailability" placeholder="Наличие (На заказ / В наличии)" required>
+        <input type="text" id="productConditions" placeholder="Условия (Опт / Розница)" required>
+        <input type="text" id="productPayment" placeholder="Оплата (Наличный / Безналичный расчёт)" required>
+        <input type="text" id="productDelivery" placeholder="Доставка (Самовывоз / Доставка)" required>
+        <input type="number" id="productPrice" placeholder="Цена (KZT)" required>
+        <input type="file" id="productImage">
+        <button type="submit" class="btn">Добавить продукт</button>
+      </form>
+    </section>
+  </main>
+
+  <script>
+    // --- JavaScript: Functionality remains unchanged ---
+    function fetchData() {
+      fetch("/admin/data", {
+        headers: { "Authorization": "Bearer " + localStorage.getItem("adminToken") }
+      })
+      .then(res => res.json())
+      .then(data => {
+        const jobContainer = document.getElementById("jobs");
+        jobContainer.innerHTML = data.jobs.map(job =>
+          `<div class="card">
+              <h4>${job.title}</h4>
+              <p>Описание: ${job.description}</p>
+              <p>Зарплата: ${job.salary}</p>
+              <button onclick="deleteJob('${job._id}')" class="btn btn-danger">Удалить</button>
+          </div>`
+        ).join("");
+
+        const productContainer = document.getElementById("products");
+        productContainer.innerHTML = data.products.map(product =>
+          `<div class="card">
+              <h4>${product.name}</h4>
+              <p>${product.description}</p>
+              <p><strong>Наличие:</strong> ${product.availability}</p>
+              <p><strong>Условия:</strong> ${product.conditions}</p>
+              <p><strong>Оплата:</strong> ${product.payment}</p>
+              <p><strong>Доставка:</strong> ${product.delivery}</p>
+              <p><strong>Цена:</strong> ${product.price} KZT</p>
+              ${product.imageUrl ? `<img src="${product.imageUrl}" alt="${product.name}" class="product-image">` : ""}
+              <button onclick="deleteProduct('${product._id}')" class="btn btn-danger">Удалить</button>
+          </div>`
+        ).join("");
+      });
+    }
+
+    document.getElementById("jobForm").addEventListener("submit", function(e) {
+      e.preventDefault();
+      const jobData = {
+        title: document.getElementById("jobTitle").value,
+        description: document.getElementById("jobDescription").value,
+        salary: document.getElementById("jobSalary").value
+      };
+      fetch("/admin/add-job", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          "Authorization": "Bearer " + localStorage.getItem("adminToken")
+        },
+        body: JSON.stringify(jobData)
+      }).then(() => fetchData());
+    });
+
+    document.getElementById("productForm").addEventListener("submit", function (e) {
+      e.preventDefault();
+      const formData = new FormData();
+      formData.append("name", document.getElementById("productName").value.trim());
+      formData.append("description", document.getElementById("productDescription").value.trim());
+      formData.append("availability", document.getElementById("productAvailability").value.trim());
+      formData.append("conditions", document.getElementById("productConditions").value.trim());
+      formData.append("payment", document.getElementById("productPayment").value.trim());
+      formData.append("delivery", document.getElementById("productDelivery").value.trim());
+      formData.append("price", document.getElementById("productPrice").value.trim());
+
+      const imageFile = document.getElementById("productImage").files[0];
+      if (imageFile) {
+          formData.append("image", imageFile);
+      }
+
+      console.log("Sending Product Data:", [...formData.entries()]); // Debugging
+
+      fetch("/admin/add-product", {
+          method: "POST",
+          headers: { "Authorization": "Bearer " + localStorage.getItem("adminToken") },
+          body: formData
+      }).then(res => res.json())
+        .then(data => {
+            if (data.success) fetchData();
+            else console.error("Error adding product:", data.message);
+        });
+    });
+
+    function deleteJob(id) {
+      fetch(`/admin/delete-job/${id}`, {
+        method: "DELETE",
+        headers: { "Authorization": "Bearer " + localStorage.getItem("adminToken") }
+      }).then(() => fetchData());
+    }
+
+    function deleteProduct(id) {
+      fetch(`/admin/delete-product/${id}`, {
+        method: "DELETE",
+        headers: { "Authorization": "Bearer " + localStorage.getItem("adminToken") }
+      }).then(() => fetchData());
+    }
+
+    fetchData();
+  </script>
+</body>
+</html>

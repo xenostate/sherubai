@@ -15,10 +15,12 @@ app.use("/uploads", express.static("uploads"));
 
 const mongoose = require("mongoose");
 
-// Connect to MongoDB
-mongoose.connect("mongodb://127.0.0.1:27017/sherubaiDB", { useNewUrlParser: true, useUnifiedTopology: true })
-    .then(() => console.log("Connected to MongoDB"))
-    .catch(err => console.log("MongoDB connection error:", err));
+
+const dbURI = process.env.MONGODB_URI;
+
+mongoose.connect(dbURI, { useNewUrlParser: true, useUnifiedTopology: true })
+  .then(() => console.log('MongoDB connected'))
+  .catch(err => console.log(err));
 
 // Serve static frontend files
 app.use(express.static(path.join(__dirname, '../frontend')));

@@ -1,57 +1,100 @@
-<script>
-    const products = [
-        {
-            name: "Уголь К7",
-            description: "Высококачественный уголь с повышенной теплоотдачей, подходит для отопления и промышленных котлов.",
-            availability: "На заказ",
-            conditions: "Опт/Розница",
-            payment: "Наличная/Безналичная",
-            delivery: "Самовывоз",
-            price: "9000",
-            imageUrl: "images/product1.jpeg" // Replace with your image path
-        },
-        {
-            name: "Уголь К3",
-            description: "Уголь высокой калорийности, оптимальный для металлургии и обогатительных фабрик.",
-            availability: "На заказ",
-            conditions: "Опт/Розница",
-            payment: "Наличная/Безналичная",
-            delivery: "Самовывоз",
-            price: "5000",
-            imageUrl: "images/product2.jpeg" // Replace with your image path
-        },
-        {
-            name: "Уголь К2",
-            description: "Уголь с низким содержанием серы, используется в котлах для теплоэнергетических установок.",
-            availability: "На складе",
-            conditions: "Опт",
-            payment: "Наличная",
-            delivery: "Доставка",
-            price: "5000",
-            imageUrl: "images/product3.jpeg" // Replace with your image path
-        }
-    ];
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Наши продукты</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <header>
+        <div class="header-container">
+            <div class="logo">
+                <a href="index.html">
+                    <img src="images/logo1.png" alt="Sherubai Komir Logo" />
+                </a>
+            </div>
+            <nav>
+                <ul>
+                    <li><a href="index.html">Главная</a></li>
+                    <li><a href="products.html">Каталог</a></li>
+                    <li><a href="about.html">О нас</a></li>
+                    <li><a href="careers.html">Карьера</a></li>
+                    <li><a href="contact.html">Связь с нами</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
 
-    // Find the product container and clear the loading text
-    const productContainer = document.getElementById("product-list");
-    productContainer.innerHTML = ""; // Clear the loading text
+    <section class="products">
+        <h2>Наши продукты</h2>
+        <div id="product-list" class="product-grid">
+            <p>Загрузка...</p>
+        </div>
+    </section>
 
-    // Map through the products and generate HTML
-    productContainer.innerHTML = products.map(product => {
-        const imageUrl = product.imageUrl && product.imageUrl.startsWith("/uploads/")
-            ? product.imageUrl
-            : `/uploads/${product.imageUrl}`;
+    <script>
+        const products = [
+            {
+                name: "Уголь К7",
+                description: "Высококачественный уголь с повышенной теплоотдачей, подходит для отопления и промышленных котлов.",
+                availability: "На заказ",
+                conditions: "Опт/Розница",
+                payment: "Наличная/Безналичная",
+                delivery: "Самовывоз",
+                price: "9000",
+                imageUrl: "images/product1.jpeg" // Replace with your image path
+            },
+            {
+                name: "Уголь К3",
+                description: "Уголь высокой калорийности, оптимальный для металлургии и обогатительных фабрик.",
+                availability: "На заказ",
+                conditions: "Опт/Розница",
+                payment: "Наличная/Безналичная",
+                delivery: "Самовывоз",
+                price: "5000",
+                imageUrl: "images/product2.jpeg" // Replace with your image path
+            },
+            {
+                name: "Уголь К2",
+                description: "Уголь с низким содержанием серы, используется в котлах для теплоэнергетических установок.",
+                availability: "На складе",
+                conditions: "Опт",
+                payment: "Наличная",
+                delivery: "Доставка",
+                price: "5000",
+                imageUrl: "images/product3.jpeg" // Replace with your image path
+            }
+        ];
 
-        return `
-            <div class="product-card">
-                <h3>${product.name}</h3>
-                ${product.imageUrl ? `<img src="${imageUrl}" alt="${product.name}" style="max-width: 300px; height: auto;">` : ""}
-                <p>${product.description}</p>
-                <p><strong>Наличие:</strong> ${product.availability}</p>
-                <p><strong>Условия:</strong> ${product.conditions}</p>
-                <p><strong>Оплата:</strong> ${product.payment}</p>
-                <p><strong>Доставка:</strong> ${product.delivery}</p>
-                <p><strong>Цена:</strong> ${product.price}₸ за тонну</p>
-            </div>`;
-    }).join(""); // Join the array of HTML strings into one
-</script>
+        // Find the product container and clear the loading text
+        const productContainer = document.getElementById("product-list");
+        productContainer.innerHTML = ""; // Clear the loading text
+
+        // Map through the products and generate HTML
+        productContainer.innerHTML = products.map(product => {
+            const imageUrl = product.imageUrl && product.imageUrl.startsWith("/uploads/")
+                ? product.imageUrl
+                : `/uploads/${product.imageUrl}`;
+
+            return `
+                <div class="product-card">
+                    <h3>${product.name}</h3>
+                    ${product.imageUrl ? `<img src="${imageUrl}" alt="${product.name}" style="max-width: 300px; height: auto;">` : ""}
+                    <p>${product.description}</p>
+                    <p><strong>Наличие:</strong> ${product.availability}</p>
+                    <p><strong>Условия:</strong> ${product.conditions}</p>
+                    <p><strong>Оплата:</strong> ${product.payment}</p>
+                    <p><strong>Доставка:</strong> ${product.delivery}</p>
+                    <p><strong>Цена:</strong> ${product.price}₸ за тонну</p>
+                </div>`;
+        }).join(""); // Join the array of HTML strings into one
+    </script>
+
+    <footer>
+        <p> Адрес: г. Караганда, Улица Жанибекова 45 </p>
+        <p> Контактный номер: +7 (721) 221-33-31 </p>
+        <p> © 2019-2025, ТОО "Sherubai Komir" </p>
+    </footer>
+</body>
+</html>

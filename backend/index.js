@@ -13,14 +13,18 @@ app.use(express.urlencoded({ extended: true }));
 app.use("/uploads", express.static("uploads"));
 
 
-const mongoose = require("mongoose");
+const mongoose = require('mongoose');
 
-
+// Replace this with the connection string you retrieved
 const dbURI = process.env.MONGODB_URI;
 
 mongoose.connect(dbURI, { useNewUrlParser: true, useUnifiedTopology: true })
-  .then(() => console.log('MongoDB connected'))
-  .catch(err => console.log(err));
+  .then(() => {
+    console.log('Connected to MongoDB');
+  })
+  .catch((err) => {
+    console.error('Failed to connect to MongoDB:', err);
+  });
 
 // Serve static frontend files
 app.use(express.static(path.join(__dirname, '../frontend')));

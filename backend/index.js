@@ -10,7 +10,9 @@ const cors = require('cors');
 const app = express();
 const PORT = 3000;
 
-app.use(cors());
+app.use(cors({
+    origin: ['https://yourfrontenddomain.com']
+  }));
 
 // 🔹 Ensure Express can parse JSON and URL-encoded data
 app.use(express.json());

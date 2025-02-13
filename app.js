@@ -11,6 +11,14 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 
+    fetch('https://guarded-reef-00926.herokuapp.com/api/products') // replace with your actual endpoint
+        .then(response => response.json())
+        .then(data => {
+            console.log('Data from backend:', data);
+            // Here, you can update the webpage with the fetched data
+        })
+        .catch(error => console.error('Error fetching data:', error));
+
     function checkScroll() {
         fadeIns.forEach(element => {
             const position = element.getBoundingClientRect().top;

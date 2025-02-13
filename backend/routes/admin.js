@@ -5,10 +5,16 @@ const Job = require("../models/job");
 const Product = require("../models/product");
 const multer = require("multer");
 const path = require("path");
+const mongoose = require("mongoose");
 
 const adminUsername = "admin";
 const adminPassword = "password123"; // Change this for production security
 const secretKey = "your_secret_key";
+
+// MongoDB connection
+mongoose.connect(process.env.MONGODB_URI || "mongodb://localhost:27017/yourdb", { useNewUrlParser: true, useUnifiedTopology: true })
+    .then(() => console.log('MongoDB connected'))
+    .catch(err => console.error('MongoDB connection error:', err));
 
 let jobs = [];
 let products = [];

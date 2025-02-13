@@ -3,6 +3,9 @@ const path = require('path');
 const adminRoutes = require("./routes/admin"); // Ensure correct path
 const bodyParser = require("body-parser");
 
+const cors = require('cors');
+app.use(cors());
+
 const app = express();
 const PORT = 3000;
 

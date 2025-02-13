@@ -4,10 +4,13 @@ const adminRoutes = require("./routes/admin"); // Ensure correct path
 const bodyParser = require("body-parser");
 
 const cors = require('cors');
-app.use(cors());
+
+
 
 const app = express();
 const PORT = 3000;
+
+app.use(cors());
 
 // 🔹 Ensure Express can parse JSON and URL-encoded data
 app.use(express.json());
@@ -40,6 +43,10 @@ app.use("/admin", adminRoutes); // Register admin routes
 
 
 
-app.listen(PORT, () => {
-    console.log(`Server running at http://localhost:${PORT}`);
+
+// Fallback to a default port if PORT is not set
+const port = process.env.PORT || 3000;
+
+app.listen(port, () => {
+  console.log(`Server running at http://localhost:${port}`);
 });
